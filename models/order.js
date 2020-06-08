@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   order.associate = function (models) {
-    order.belongsTo(models.user)
+    order.belongsTo(models.user);
+    order.belongsToMany(models.product, {
+      through: "orderProducts",
+      foreignKey: "orderId"
+    });
   };
   return order;
 };
